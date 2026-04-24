@@ -6,7 +6,6 @@ import { CalculatorLayout } from './components/layout/CalculatorLayout';
 import BasicCalculator from './components/modes/BasicCalculator';
 import { HistoryPanel } from './components/panels/HistoryPanel';
 import { VoiceInput } from './components/ui/VoiceInput';
-import { useCalculatorStore } from './store/useCalculatorStore';
 import { History, Moon, Sun, Monitor, Calculator, FlaskConical, Scaling, Settings, PieChart, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SettingsPanel } from './components/panels/SettingsPanel';

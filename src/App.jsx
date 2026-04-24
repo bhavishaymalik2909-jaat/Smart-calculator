@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Suspense, useCallback } from 'react';
+import { useCalculatorStore } from './store/useCalculatorStore';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Display } from './components/display/Display';
 import { CalculatorLayout } from './components/layout/CalculatorLayout';
@@ -191,6 +192,7 @@ const AppContent = () => {
 };
 
 function App() {
+
   return (
     <ErrorBoundary>
       <div className="min-h-screen sm:min-h-0 bg-gray-100 dark:bg-black w-full flex items-center justify-center transition-colors duration-300 font-sans">

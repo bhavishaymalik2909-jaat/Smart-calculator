@@ -21,10 +21,7 @@ export const Display = ({ expression, result, onCopy }) => {
     if (len < 24) return '1.5rem'; // 2xl
     return '1.25rem'; // xl
   };
-<<<<<<< HEAD
 
-=======
->>>>>>> bb9240e (fixed all merge conflicts)
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}

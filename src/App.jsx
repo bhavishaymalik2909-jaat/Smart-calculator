@@ -9,19 +9,23 @@ import { VoiceInput } from './components/ui/VoiceInput';
 import { History, Moon, Sun, Monitor, Calculator, FlaskConical, Scaling, Settings, PieChart, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SettingsPanel } from './components/panels/SettingsPanel';
-<<<<<<< HEAD
-import('./components/modes/FinancialCalculator')
-import('./components/modes/BodyCalculator')
 
-=======
->>>>>>> bb9240e (fixed all merge conflicts)
 const ScientificCalculator = React.lazy(() => import('./components/modes/ScientificCalculator'));
 const UnitConverter = React.lazy(() => import('./components/modes/UnitConverter'));
 const FinancialCalculator = React.lazy(() => import('./components/modes/FinancialCalculator'));
 const BodyCalculator = React.lazy(() => import('./components/modes/BodyCalculator'));
 
 const AppContent = () => {
-  const { expression, result, mode, setMode, theme, setTheme, handleInput, incrementSessionTime } = useCalculatorStore();
+  const store = useCalculatorStore();
+
+  const expression = store.expression;
+  const result = store.result;
+  const mode = store.mode;
+  const setMode = store.setMode;
+  const theme = store.theme;
+  const setTheme = store.setTheme;
+  const handleInput = store.handleInput;
+  const incrementSessionTime = store.incrementSessionTime;
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -48,11 +52,7 @@ const AppContent = () => {
     const handleKeyDown = (e) => {
       // Isolate global key interception completely if outside native calculator tools
       if (mode !== 'basic' && mode !== 'scientific') return;
-<<<<<<< HEAD
       
-=======
-
->>>>>>> bb9240e (fixed all merge conflicts)
       // Prevent double typing bugs when physically focused inside native input elements
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
 

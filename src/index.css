@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased transition-colors duration-300;
+    /* Default to light mode (white/black) */
+    background-color: white;
+    color: black;
+  }
+  
+  .dark body {
+    /* Premium dark mode spec: #0F0F0F */
+    background-color: #0F0F0F;
+    color: white;
+  }
+}
+
+/* Custom scrollbar for history panel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 10px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}

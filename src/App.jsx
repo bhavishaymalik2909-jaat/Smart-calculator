@@ -16,16 +16,16 @@ const FinancialCalculator = React.lazy(() => import('./components/modes/Financia
 const BodyCalculator = React.lazy(() => import('./components/modes/BodyCalculator'));
 
 const AppContent = () => {
-  const store = useCalculatorStore();
-
-  const expression = store.expression;
-  const result = store.result;
-  const mode = store.mode;
-  const setMode = store.setMode;
-  const theme = store.theme;
-  const setTheme = store.setTheme;
-  const handleInput = store.handleInput;
-  const incrementSessionTime = store.incrementSessionTime;
+  const {
+    expression,
+    result,
+    mode,
+    setMode,
+    theme,
+    setTheme,
+    handleInput,
+    incrementSessionTime
+  } = useCalculatorStore();
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -52,7 +52,7 @@ const AppContent = () => {
     const handleKeyDown = (e) => {
       // Isolate global key interception completely if outside native calculator tools
       if (mode !== 'basic' && mode !== 'scientific') return;
-      
+
       // Prevent double typing bugs when physically focused inside native input elements
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
 

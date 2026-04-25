@@ -202,9 +202,3 @@ function App() {
 }
 
 export default App;
-<Suspense fallback={<div>Loading mode...</div>}></Suspense>
-{ mode === 'basic' && <BasicCalculator /> }
-{ mode === 'scientific' && <ScientificCalculator /> }
-{ mode === 'converter' && <UnitConverter /> }
-{ mode === 'financial' && <FinancialCalculator /> }
-{ mode === 'body' && <BodyCalculator /> }

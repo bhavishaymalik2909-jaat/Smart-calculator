@@ -33,38 +33,26 @@ const AppContent = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Apply Theme
   useEffect(() => {
     const root = window.document.documentElement;
     const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    if (isDark) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    if (isDark) root.classList.add('dark');
+    else root.classList.remove('dark');
   }, [theme]);
 
-  // Keyboard support
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Isolate global key interception completely if outside native calculator tools
       if (mode !== 'basic' && mode !== 'scientific') return;
-
-      // Prevent double typing bugs when physically focused inside native input elements
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
-
-      // Prevent default browser shortcuts like / for search overriding us sometimes
       const key = e.key;
       if (/[0-9.]/.test(key)) handleInput('number', key);
       else if (['+', '-', '*', '/'].includes(key)) {
         const op = key === '*' ? '×' : key === '/' ? '÷' : key === '-' ? '−' : '+';
         handleInput('operator', op);
-      }
-      else if (key === 'Enter' || key === '=') {
+      } else if (key === 'Enter' || key === '=') {
         e.preventDefault();
         handleInput('calculate', '=');
-      }
-      else if (key === 'Backspace') handleInput('delete');
+      } else if (key === 'Backspace') handleInput('delete');
       else if (key === 'Escape') handleInput('clear');
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -84,26 +72,17 @@ const AppContent = () => {
     <div className="flex justify-between items-center mb-6 w-full">
       <div className="flex gap-2">
         <VoiceInput />
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={toggleTheme}
-          className="p-3 rounded-full bg-gray-100 dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition shadow-sm focus:outline-none"
-        >
+        <motion.button whileTap={{ scale: 0.9 }} onClick={toggleTheme}
+          className="p-3 rounded-full bg-gray-100 dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition shadow-sm focus:outline-none">
           {theme === 'light' ? <Sun size={20} /> : theme === 'dark' ? <Moon size={20} /> : <Monitor size={20} />}
         </motion.button>
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsHistoryOpen(true)}
-          className="p-3 rounded-full bg-gray-100 dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition shadow-sm focus:outline-none"
-        >
+        <motion.button whileTap={{ scale: 0.9 }} onClick={() => setIsHistoryOpen(true)}
+          className="p-3 rounded-full bg-gray-100 dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition shadow-sm focus:outline-none">
           <History size={20} />
         </motion.button>
       </div>
-      <motion.button
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsSettingsOpen(true)}
-        className="p-3 rounded-full bg-gray-100 dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition shadow-sm focus:outline-none"
-      >
+      <motion.button whileTap={{ scale: 0.9 }} onClick={() => setIsSettingsOpen(true)}
+        className="p-3 rounded-full bg-gray-100 dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#2A2A2A] transition shadow-sm focus:outline-none">
         <Settings size={20} />
       </motion.button>
     </div>
@@ -118,11 +97,8 @@ const AppContent = () => {
         { id: 'financial', label: 'Fin', icon: PieChart },
         { id: 'body', label: 'Body', icon: Activity }
       ].map(m => (
-        <button
-          key={m.id}
-          onClick={() => setMode(m.id)}
-          className={`flex flex-col items-center gap-1.5 p-2 focus:outline-none transition-colors ${mode === m.id ? 'text-primary' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}
-        >
+        <button key={m.id} onClick={() => setMode(m.id)}
+          className={`flex flex-col items-center gap-1.5 p-2 focus:outline-none transition-colors ${mode === m.id ? 'text-primary' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}>
           <m.icon size={22} className={`transition-all ${mode === m.id ? "drop-shadow-[0_0_8px_rgba(124,58,237,0.5)] scale-110" : ""}`} />
           <span className="text-[10px] font-semibold tracking-wide uppercase">{m.label}</span>
         </button>
@@ -144,41 +120,25 @@ const AppContent = () => {
           )
         }
         keypad={
-          <div className="h-full relative overflow-hidden">
+          <Suspense fallback={null}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={mode}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                style={{ willChange: "transform, opacity" }}
-                className="h-full w-full absolute inset-0 pb-12 flex flex-col"
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+                style={{ willChange: "opacity, transform" }}
+                className="w-full"
               >
-                <Suspense fallback={null}>
-                  <div style={{ display: mode === 'basic' ? 'block' : 'none' }}>
-                    <BasicCalculator />
-                  </div>
-
-                  <div style={{ display: mode === 'scientific' ? 'block' : 'none' }}>
-                    <ScientificCalculator />
-                  </div>
-
-                  <div style={{ display: mode === 'converter' ? 'block' : 'none' }}>
-                    <UnitConverter />
-                  </div>
-
-                  <div style={{ display: mode === 'financial' ? 'block' : 'none' }}>
-                    <FinancialCalculator />
-                  </div>
-
-                  <div style={{ display: mode === 'body' ? 'block' : 'none' }}>
-                    <BodyCalculator />
-                  </div>
-                </Suspense>
+                {mode === 'basic' && <BasicCalculator />}
+                {mode === 'scientific' && <ScientificCalculator />}
+                {mode === 'converter' && <UnitConverter />}
+                {mode === 'financial' && <FinancialCalculator />}
+                {mode === 'body' && <BodyCalculator />}
               </motion.div>
             </AnimatePresence>
-          </div>
+          </Suspense>
         }
         bottomNavigation={<BottomNav />}
       />
@@ -189,10 +149,9 @@ const AppContent = () => {
 };
 
 function App() {
-
   return (
     <ErrorBoundary>
-      <div className="min-h-screen sm:min-h-0 bg-gray-100 dark:bg-black w-full flex items-center justify-center transition-colors duration-300 font-sans">
+      <div className="h-[100dvh] bg-gray-100 dark:bg-black w-full flex items-center justify-center transition-colors duration-300 font-sans overflow-hidden">
         <AppContent />
       </div>
     </ErrorBoundary>

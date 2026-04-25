@@ -5,58 +5,55 @@ import { financialData } from '../../utils/financialData';
 import { GenericFormScreen } from '../ui/GenericFormScreen';
 import { ModuleGridCard } from '../ui/ModuleGridCard';
 
-// Using consistent icons if they missing from util mapping
 const iconMap = { Home, Tag, Briefcase, Percent, Landmark, TrendingUp, DollarSign, Wallet, CreditCard, ShoppingCart };
 
 const FinancialCalculator = () => {
     const [selectedTool, setSelectedTool] = useState(null);
 
+    if (!financialData || !Array.isArray(financialData)) {
+        return (
+            <div className="flex flex-col items-center justify-center p-8 text-center text-red-500">
+                <p className="font-semibold">Error: Financial data unavailable.</p>
+            </div>
+        );
+    }
+
     return (
-        <div className="h-full w-full relative bg-gray-50 dark:bg-dark-bg">
-            {(!financialData || !Array.isArray(financialData)) ? (
-                <div className="flex h-full flex-col items-center justify-center p-8 text-center text-red-500">
-                    <p className="font-semibold">Error: Financial data source unavailable or invalid format.</p>
-                </div>
-            ) : (
+        <div className="w-full">
             <AnimatePresence mode="wait">
                 {!selectedTool ? (
-                    <motion.div 
+                    <motion.div
                         key="grid"
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="h-full w-full overflow-y-auto px-4 pb-32 pt-8 touch-pan-y"
-                        style={{ WebkitOverflowScrolling: 'touch' }}
                     >
                         <div className="flex justify-between items-center mb-6 px-2">
-                           <h2 className="text-2xl font-bold text-black dark:text-white tracking-tight">Financial</h2>
+                            <h2 className="text-2xl font-bold text-black dark:text-white tracking-tight">Financial</h2>
                         </div>
-                        <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                            {financialData?.map((data) => {
-                                const name = data.id;
+                        <div className="grid grid-cols-3 gap-3 sm:gap-4 pb-4">
+                            {financialData.map((data) => {
                                 const Icon = iconMap[data.icon] || DollarSign;
                                 return (
-                                    <ModuleGridCard 
-                                        key={name}
-                                        id={name}
-                                        category={name}
+                                    <ModuleGridCard
+                                        key={data.id}
+                                        id={data.id}
+                                        category={data.id}
                                         icon={Icon}
-                                        onClick={() => setSelectedTool(name)}
+                                        onClick={() => setSelectedTool(data.id)}
                                     />
                                 );
                             })}
                         </div>
                     </motion.div>
                 ) : (
-                    <motion.div 
+                    <motion.div
                         key="screen"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="absolute inset-0 z-20 bg-white dark:bg-dark-bg overflow-y-auto touch-pan-y"
-                        style={{ WebkitOverflowScrolling: 'touch' }}
                     >
-                        <GenericFormScreen 
+                        <GenericFormScreen
                             title={selectedTool}
                             inputs={financialData.find(d => d.id === selectedTool)?.inputs || []}
                             calculateResult={financialData.find(d => d.id === selectedTool)?.calculate}
@@ -66,7 +63,6 @@ const FinancialCalculator = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-            )}
         </div>
     );
 };

@@ -7,7 +7,7 @@ export const CalculatorLayout = ({ display, keypad, bottomNavigation }) => {
 
   const layoutClasses = oneHandMode 
     ? "w-full max-w-[300px] h-[600px] shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-[2.5rem] bg-white dark:bg-dark-bg transition-colors duration-300 overflow-hidden relative select-none absolute bottom-10 right-4 border border-gray-300 dark:border-gray-700 cursor-grab z-50"
-    : "w-full landscape:max-w-full max-w-[420px] mx-auto landscape:h-[100dvh] h-[100dvh] max-h-[950px] flex flex-col bg-white dark:bg-dark-bg transition-colors duration-300 landscape:shadow-none shadow-2xl overflow-hidden sm:rounded-[2rem] sm:h-[850px] sm:mt-8 sm:border sm:border-gray-200 dark:sm:border-gray-800 relative select-none";
+    : "w-full max-w-[420px] mx-auto h-[100dvh] flex flex-col bg-white dark:bg-dark-bg transition-colors duration-300 shadow-2xl overflow-hidden relative select-none sm:max-w-full sm:rounded-none sm:border-none";
 
   return (
     <motion.div 

@@ -19,7 +19,8 @@ const UnitConverter = () => {
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="h-full w-full overflow-y-auto px-4 pb-32 pt-8"
+                        className="h-full w-full overflow-y-auto px-4 pb-32 pt-8 touch-pan-y"
+                        style={{ WebkitOverflowScrolling: 'touch' }}
                     >
                         <div className="flex justify-between items-center mb-6 px-2">
                            <h2 className="text-2xl font-bold text-black dark:text-white tracking-tight">Conversions</h2>
@@ -46,7 +47,8 @@ const UnitConverter = () => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="absolute inset-0 z-20 bg-white dark:bg-dark-bg"
+                        className="absolute inset-0 z-20 bg-white dark:bg-dark-bg overflow-y-auto touch-pan-y"
+                        style={{ WebkitOverflowScrolling: 'touch' }}
                     >
                         <ConverterScreen category={selectedCategory} onBack={() => setSelectedCategory(null)} />
                     </motion.div>

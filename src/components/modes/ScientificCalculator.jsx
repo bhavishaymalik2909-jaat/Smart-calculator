@@ -58,7 +58,10 @@ const ScientificCalculator = () => {
             {isDegree ? 'DEG' : 'RAD'}
          </button>
       </div>
-      <div className="grid grid-cols-4 gap-2 sm:gap-3 flex-1 overflow-y-auto pr-1 pb-8 custom-scrollbar">
+      <div 
+        className="grid grid-cols-4 gap-2 sm:gap-3 flex-1 overflow-y-auto pr-1 pb-8 custom-scrollbar touch-pan-y"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         {buttons.map((btn, index) => {
         return (
           <Button 

@@ -16,25 +16,22 @@ const FinancialCalculator = React.lazy(() => import('./components/modes/Financia
 const BodyCalculator = React.lazy(() => import('./components/modes/BodyCalculator'));
 
 const AppContent = () => {
-  const {
-    expression,
-    result,
-    mode,
-    setMode,
-    theme,
-    setTheme,
-    handleInput,
-    incrementSessionTime
-  } = useCalculatorStore();
+  const expression = useCalculatorStore(state => state.expression);
+  const result = useCalculatorStore(state => state.result);
+  const mode = useCalculatorStore(state => state.mode);
+  const setMode = useCalculatorStore(state => state.setMode);
+  const theme = useCalculatorStore(state => state.theme);
+  const setTheme = useCalculatorStore(state => state.setTheme);
+  const handleInput = useCalculatorStore(state => state.handleInput);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      incrementSessionTime();
+      useCalculatorStore.getState().incrementSessionTime();
     }, 1000);
     return () => clearInterval(timer);
-  }, [incrementSessionTime]);
+  }, []);
 
   // Apply Theme
   useEffect(() => {
@@ -155,7 +152,8 @@ const AppContent = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="h-full w-full absolute inset-0 pb-12"
+                style={{ willChange: "transform, opacity" }}
+                className="h-full w-full absolute inset-0 pb-12 flex flex-col"
               >
                 <Suspense fallback={null}>
                   <div style={{ display: mode === 'basic' ? 'block' : 'none' }}>

@@ -7,8 +7,12 @@
             "destination": "/manifest.json"
         },
         {
-            "source": "/icons/(.*)",
-            "destination": "/icons/$1"
+            "source": "/icons/icon-192.png",
+            "destination": "/icons/icon-192.png"
+        },
+        {
+            "source": "/icons/icon-512.png",
+            "destination": "/icons/icon-512.png"
         },
         {
             "source": "/(.*)",

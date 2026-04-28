@@ -1,5 +1,5 @@
 {
-  "packageId": "app.vercel.project_nd3oh.twa",
+  "packageId": "com.smartmodularcalculator.app",
   "host": "project-nd3oh.vercel.app",
   "name": "Smart Calculator",
   "launcherName": "Calculator",
@@ -19,8 +19,8 @@
     "path": "/Users/mac/Desktop/Project Demo/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "3",
+  "appVersionCode": 3,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://project-nd3oh.vercel.app/manifest.json",
@@ -42,5 +42,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1"
+  "appVersion": "3"
 }

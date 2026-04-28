@@ -21,7 +21,7 @@ plugins {
 }
 
 def twaManifest = [
-    applicationId: 'app.vercel.project_nd3oh.twa',
+    applicationId: 'com.smartmodularcalculator.app',
     hostName: 'project-nd3oh.vercel.app', // The domain being opened in the TWA.
     launchUrl: '/', // The start path for the TWA. Must be relative to the domain.
     name: 'Smart Calculator', // The application name.
@@ -52,13 +52,13 @@ def twaManifest = [
 
 android {
     compileSdkVersion 36
-    namespace "app.vercel.project_nd3oh.twa"
+    namespace "com.smartmodularcalculator.app"
     defaultConfig {
-        applicationId "app.vercel.project_nd3oh.twa"
+        applicationId "com.smartmodularcalculator.app"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 1
-        versionName "1"
+        versionCode 3
+        versionName "3"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name

@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.smartmodularcalculator.app",
+    "sha256_cert_fingerprints":
+    ["7A:D4:B4:19:AB:7E:E2:63:2B:3F:F4:D4:0C:66:0B:97:CE:F9:4D:C7:C5:BB:1E:A1:C2:F8:00:A3:96:05:1E:80"]
+  }
+}]
